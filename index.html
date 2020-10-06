@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<title>jQuery - mySQL - Connection</title>
+<head>
+
+</head>
+<body>
+
+	<h2>jQuery - mySQL - Connection</h2>
+
+	
+	<div>
+		<button onclick="mySave()">speichern</button>
+		<button onclick="myLoad()">laden</button>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		
+		function mySave(){
+			var tempContent = "Hello World";
+			
+			$.ajax({
+				url: "/php/dbSave.php",
+				type: "POST",
+				data: {data: tempContent},
+				dataType: "json",
+				success: function(d) {
+					console.log("success");
+				},
+				error: function (request, status, error) {
+					console.log(request.responseText);
+				}
+			});
+		}
+		
+		function myLoad(){
+			var tempID = 1;
+			
+			$.ajax({
+				url: "/php/dbLoad.php",
+				type: "GET",
+				data: {data: tempID},
+				dataType: "json",
+				success: function(result) {
+					console.log(result);
+				},
+				error: function (request, status, error) {
+					console.log(request.responseText);
+				}
+			});
+		
+			
+		}
+
+	</script>
+
+</body>
+</html>
